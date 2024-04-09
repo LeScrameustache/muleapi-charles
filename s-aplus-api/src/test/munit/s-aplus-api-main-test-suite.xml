@@ -69,7 +69,7 @@
 					<munit-tools:with-attribute whereValue="s-aplus-api-config" attributeName="config-ref" />
 				</munit-tools:with-attributes>
 				<munit-tools:then-return >
-					<munit-tools:error typeId="APIKIT:METHOD_NOT_ACCEPTABLE" />
+					<munit-tools:error typeId="APIKIT:NOT_ACCEPTABLE" />
 				</munit-tools:then-return>
 			</munit-tools:mock-when>
 		</munit:behavior>
