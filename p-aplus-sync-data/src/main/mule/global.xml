@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<http:listener-config
+		name="p-aplus-sync-data-httpListenerConfig">
+		<http:listener-connection host="${http.host}"
+			port="${http.port}" readTimeout="${http.timeout}"/>
+	</http:listener-config>
+	<apikit:config name="p-aplus-sync-data-config"
+		api="p-aplus-sync-data.raml" outboundHeadersMapName="outboundHeaders"
+		httpStatusVarName="httpStatus" />
+	<global-property doc:name="Global Property" doc:id="d72e27a2-c298-4b08-a36a-0a9cf78cd73f" name="mule.env" value="devlocal" />
+	<configuration-properties doc:name="Configuration properties" doc:id="bafff4e3-f02d-478a-b4d2-bfb2c704e1fa" file="env/${mule.env}.yaml" />
+	<http:request-config name="HTTP_Request_s-aplus" doc:name="HTTP Request configuration" doc:id="0fedb264-534d-4942-9c04-3760ac754b8f" >
+		<http:request-connection host="${system.aplus.host}" port="${system.aplus.port}" />
+	</http:request-config>
+	<http:request-config name="HTTP_Request_s-salesforce" doc:name="HTTP Request configuration" doc:id="1916a0b6-534c-4ed4-b42a-a18eb988e403" >
+		<http:request-connection host="${system.salesforce.host}" port="${system.salesforce.port}" />
+	</http:request-config>
+
+
+</mule>

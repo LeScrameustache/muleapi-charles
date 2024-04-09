@@ -1,0 +1,15 @@
+environement:
+  name: "dev"
+  
+http:
+  host: 'localhost'
+  port: '8081'
+  timeout: '300000'
+  
+system:
+  aplus:
+    host: 'localhost'
+    port: '8081'
+  salesforce:
+    host: 'localhost'
+    port: '8081'

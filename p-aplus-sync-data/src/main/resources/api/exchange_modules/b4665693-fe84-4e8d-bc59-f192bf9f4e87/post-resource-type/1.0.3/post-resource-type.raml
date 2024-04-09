@@ -1,0 +1,14 @@
+#%RAML 1.0 ResourceType
+
+post:
+  description: <<addDescription>>
+  queryParameters: <<queryParams>>
+  body:
+    application/json:
+      type: <<bodyType>>
+  responses:
+    201:
+      body:
+        application/json:
+          example: <<postResponseExample>>
+          type: <<postResponseType>>

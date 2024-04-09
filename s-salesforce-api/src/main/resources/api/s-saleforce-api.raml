@@ -1,0 +1,18 @@
+#%RAML 1.0
+title: s-salesforce-api
+
+uses:
+  rt: /Library/library.raml
+
+/createRecords:
+  is: [rt.security]
+  type:
+    rt.post:
+      addDescription: "Create file"
+      queryParams:
+      bodyType: !include data-type/salesforce-dt.raml
+      postResponseExample: !include examples/post-record-example.raml
+      postResponseType: object
+
+
+    

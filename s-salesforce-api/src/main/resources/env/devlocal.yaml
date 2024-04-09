@@ -1,0 +1,10 @@
+environement:
+  name: "devlocal"
+  
+http:
+  host: 'localhost'
+  port: '8083'
+  timeout: '300000'
+
+file:
+  path: 'C:\Users\tempr\Documents\Formations\Formation M2I\documents\11- Mule 4 Anypoint Platform Development Fundamentals\exemples_logs'

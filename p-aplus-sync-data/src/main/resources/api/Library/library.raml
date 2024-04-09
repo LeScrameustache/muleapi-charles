@@ -1,0 +1,8 @@
+#%RAML 1.0 Library
+
+resourceTypes:
+  get: !include /exchange_modules/b4665693-fe84-4e8d-bc59-f192bf9f4e87/get-ressource-type/1.0.3/get-resource-type.raml
+  post: !include /exchange_modules/b4665693-fe84-4e8d-bc59-f192bf9f4e87/post-resource-type/1.0.3/post-resource-type.raml
+  
+traits: 
+  security: !include /exchange_modules/b4665693-fe84-4e8d-bc59-f192bf9f4e87/client-id-enforcement/1.0.0/client-id-enforcement.raml

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="s-saleforce-api-httpListenerConfig">
+        <http:listener-connection host="${http.host}" port="${http.port}" readTimeout="${http.timeout}"/>
+    </http:listener-config>
+    <apikit:config name="s-saleforce-api-config" api="s-saleforce-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus"/>
+	<configuration-properties doc:name="Configuration properties" doc:id="eb2fa78d-098d-4ea1-9700-b1688f1f69ce" file="env/${mule.env}.yaml" />
+	<global-property doc:name="Global Property" doc:id="df1777a9-e365-461f-8d0c-e0c2e868bf01" name="mule.env" value="devlocal" />
+	<file:config name="File_Config" doc:name="File Config" doc:id="f80345c3-7661-43e8-a520-c09bbf151cd5" >
+		<file:connection workingDir="${file.path}" />
+	</file:config>
+	
+	
+</mule>

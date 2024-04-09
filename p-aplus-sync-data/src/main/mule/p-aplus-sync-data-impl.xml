@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+    <flow name="get:\syncAccount:p-aplus-sync-data-config">
+        <ee:transform doc:name="variables" doc:id="f54b68be-f8dc-4bd5-86e8-2b5211dac9bc" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="client_id" ><![CDATA[%dw 2.0
+output application/json
+---
+attributes.headers.client_id]]></ee:set-variable>
+				<ee:set-variable variableName="client_secret" ><![CDATA[%dw 2.0
+output application/json
+---
+attributes.headers.client_secret]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<http:request method="GET" doc:name="Request-APLUS-getAccount" doc:id="0be0b7cb-d39b-41b1-b8af-473ff4f41dcd" config-ref="HTTP_Request_s-aplus" path="/api/getAccount" responseTimeout="#[p('http.timeout')]">
+			<http:headers ><![CDATA[#[output application/json
+---
+{
+	client_id : vars.client_id,
+	client_secret: vars.client_secret
+}]]]></http:headers>
+		</http:request>
+		<ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload map (item,index) -> {
+	titre: item.title,
+	site: item.url,
+	description: item.bite
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+		<http:request method="POST" doc:name="Request-SALESFORCE-postRecords" doc:id="a109f53a-f7e8-4c17-abaf-7e83d1a1ad4b" config-ref="HTTP_Request_s-salesforce" path="/api/createRecords">
+			<http:headers ><![CDATA[#[output application/json
+---
+{
+	client_id : vars.client_id,
+	client_secret: vars.client_secret
+}]]]></http:headers>
+		</http:request>
+    </flow>
+</mule>

@@ -1,0 +1,11 @@
+environement:
+  name: "dev"
+  
+http:
+  host: 'localhost'
+  port: '8081'
+  timeout: '300000'
+  
+healthcare:
+  protocol: 'HTTPS'
+  host: 'www.healthcare.gov'

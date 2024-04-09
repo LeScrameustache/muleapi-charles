@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="s-aplus-api-main-test-suite.xml" />
+	<munit:test name="s-aplus-api-main-test-suite-s-aplus-api-Test_APIKIT:NOT_FOUND" doc:id="daf7a02c-2038-4dbb-ba82-b8c02640b053" description="Test" expectedErrorType="APIKIT:NOT_FOUND">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="0f4080cf-5b81-4728-beb9-980c618dc555" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="s-aplus-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_FOUND" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to s-aplus-api-main" doc:id="47292bb3-7049-405c-b721-e206f50b66dc" name="s-aplus-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="c2058fda-160b-4a3f-9d59-22c81d007c09" actual="#[vars.httpStatus]" expected="404"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="s-aplus-api-main-test-suite-s-aplus-api-Test_APIKIT:BAD_REQUEST" doc:id="8d1971ce-8124-4be6-adc3-dc5336469275" description="Test" expectedErrorType="APIKIT:BAD_REQUEST">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="37aa6963-7fb3-43eb-8e9b-9e952a7872ad" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="s-aplus-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:BAD_REQUEST" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to s-aplus-api-main" doc:id="1d02cc93-fc0e-4916-8584-12623589068b" name="s-aplus-api-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="a849ee66-59e0-4b50-b092-42a75c683e9f" actual="#[vars.httpStatus]" expected="400" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="s-aplus-api-main-test-suite-s-aplus-api-Test_APIKIT:METHOD_NOT_ALLOWED" doc:id="ee4e5050-6ef8-4253-9bd9-a3a5ef8f58cd" description="Test" expectedErrorType="APIKIT:METHOD_NOT_ALLOWED">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="a6574aa4-cd92-40df-8031-1b911f9104a5" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="s-aplus-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ALLOWED" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to s-aplus-api-main" doc:id="2e03b65a-f3a2-4c53-a7ff-4bc01d0c3625" name="s-aplus-api-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="4660c71f-0e5a-4769-ad72-4574060d8bf7" actual="#[vars.httpStatus]" expected="405" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="s-aplus-api-main-test-suite-s-aplus-api-Test_APIKIT:NOT_ACCEPTABLE" doc:id="513d80d6-3644-4a37-a92b-02823f337011" description="Test" expectedErrorType="APIKIT:NOT_ACCEPTABLE">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="5fbfb427-8dc1-49f6-94f1-abc724537dee" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="s-aplus-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:METHOD_NOT_ACCEPTABLE" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to s-aplus-api-main" doc:id="ff389996-7117-4e9b-9671-568fcd3763a1" name="s-aplus-api-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="cbae29c7-91b5-4378-86e8-30d4bb6d43a0" actual="#[vars.httpStatus]" expected="406" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="s-aplus-api-main-test-suite-s-aplus-api-Test_APIKIT:UNSUPPORTED_MEDIA_TYPE" doc:id="2ea62212-e8c9-455a-849a-733fe219748a" description="Test" expectedErrorType="APIKIT:UNSUPPORTED_MEDIA_TYPE">
+		<munit:behavior>
+			<munit-tools:mock-when doc:name="Mock when" doc:id="c78d037d-3a15-4eb0-b68c-aa2865a777e8" processor="apikit:router">
+				<munit-tools:with-attributes>
+					<munit-tools:with-attribute whereValue="s-aplus-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+					<munit-tools:error typeId="APIKIT:UNSUPPORTED_MEDIA_TYPE" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution>
+			<flow-ref doc:name="Flow-ref to s-aplus-api-main" doc:id="c6b1a895-2628-4753-be6d-40e6992be9d5" name="s-aplus-api-main" />
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="f99424eb-901a-4fd0-b233-b99596e90cc7" actual="#[vars.httpStatus]" expected="415" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="s-aplus-api-main-test-suite-s-aplus-api-Test_APIKIT:NOT_IMPLEMENTED" doc:id="63412899-4a0b-47ea-a794-b922a0e07026" description="Test" expectedErrorType="APIKIT:NOT_IMPLEMENTED">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when" doc:id="a186ff99-c6c8-4bc3-9b88-f91fcf3c73cb" processor="apikit:router" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="s-aplus-api-config" attributeName="config-ref" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:error typeId="APIKIT:NOT_IMPLEMENTED" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to s-aplus-api-main" doc:id="ffe1f7b0-e613-41f5-aa82-2b682c28f337" name="s-aplus-api-main" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="3b2360ca-0a13-4511-a9b9-9407dac597c3" actual="#[vars.httpStatus]" expected="501" />
+		</munit:validation>
+	</munit:test>
+	<munit:test name="s-aplus-api-main-test" doc:id="080b12fd-4a17-465a-9fb8-8705669cf9bf" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock APIkit Router" doc:id="88fea9f9-b77c-462a-9bfe-95acdb040b32" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a2c05e5e-5100-4474-87e4-c9ecdfa81577" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://saplusapimaintest\mock_payload1.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://saplusapimaintest\mock_attributes1.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://saplusapimaintest\mock_variable_2.dwl')]" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://saplusapimaintest\mock_variable_3.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="1a998ce3-680f-4459-b75e-a62efedc77e8" >
+				<munit:payload value="#[readUrl('classpath://saplusapimaintest\set-event_payload1.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://saplusapimaintest\set-event_attributes1.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to s-aplus-api-main" doc:id="06285186-4287-434a-a241-c1e037e0e731" name="s-aplus-api-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="72d0143e-8a91-42f6-aa11-f90effe4df5b" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import saplusapimaintest::assert_expression_payload1
+---
+assert_expression_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
