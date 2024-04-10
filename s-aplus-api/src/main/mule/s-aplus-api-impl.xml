@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
 	<flow name="get:\getAccount:s-aplus-api-config">
-        <logger level="INFO" doc:name="Logger" doc:id="186640ef-28bc-4480-9378-5c0c9f8c1205" message='#["started"]'/>
-		<http:request method="GET" doc:name="Request" doc:id="4d68a9c0-d292-49f6-b100-915c7252317a" config-ref="HTTP_Request_configuration_healthcare" path="/api/index.json" responseTimeout="#[p('http.timeout')]"/>
+		<http:request method="GET" doc:name="Request-Healthcare" doc:id="90757c83-f57a-4bce-814e-9b780d40bcb1" config-ref="Healthcare-HTTP_Request_configuration" path="/api/index.json"/>
 		<ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 payload]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="ae99d835-e253-416e-bfff-6a2923915dc1" message='#["finish"]'/>
-    </flow>
-    <flow name="get:\getAccount\(id):s-aplus-api-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:variables>
-                <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="get:\getAccount\(id):s-aplus-api-config">
+		<ee:transform doc:name="Transform Message">
+			<ee:variables>
+				<ee:set-variable variableName="id">attributes.uriParams.'id'
+				</ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
@@ -39,7 +44,7 @@ output application/json
     Status: "Inactive"
   }
 } as Object {encoding: "UTF-8", mediaType: "application/json"}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
-    </flow>
+			</ee:message>
+		</ee:transform>
+	</flow>
 </mule>

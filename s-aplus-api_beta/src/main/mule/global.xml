@@ -11,17 +11,16 @@ http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/m
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
 	<http:listener-config
 		name="s-aplus-api-httpListenerConfig">
-		<http:listener-connection host="0.0.0.0"
-			port="8081" />
+		<http:listener-connection host="${http.host}"
+			port="${http.port}" readTimeout="${http.timeout}"/>
 	</http:listener-config>
 	<apikit:config name="s-aplus-api-config"
 		api="s-aplus-api.raml" outboundHeadersMapName="outboundHeaders"
 		httpStatusVarName="httpStatus" />
-	<global-property doc:name="Global Property" doc:id="b500b17c-4765-4f2e-947a-29bf03323ad9" name="mule.env" value="dev" />
-	<configuration-properties doc:name="Configuration properties" doc:id="2c339e54-698b-49fe-a20c-6bfd7e0f5371" file="env/dev.yaml" />
-	<http:request-config name="Healthcare-HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="854aa694-84f9-4641-8d6f-a92382a3872f" >
+	<configuration-properties doc:name="Configuration properties" doc:id="e5ca46ac-6488-415c-8235-2ced6cc2b5bd" file="env/${mule.env}.yaml" />
+	<global-property doc:name="Global Property" doc:id="93a47095-c395-4d76-8e67-0c388f69e116" name="mule.env" value="dev" />
+	<http:request-config name="HTTP_Request_configuration_healthcare" doc:name="HTTP Request configuration" doc:id="c6258a12-1b9e-4a47-8d5e-81bdeb8f272e" >
 		<http:request-connection protocol="${healthcare.protocol}" host="${healthcare.host}" />
 	</http:request-config>
-
 
 </mule>
